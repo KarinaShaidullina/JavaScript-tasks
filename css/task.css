@@ -1,0 +1,41 @@
+.backlog p{
+    background: #E3E3E3;
+    color: #767A7C;
+}
+
+.processing p{
+    background: #D6E7FF;
+    color: #6C9FF1;
+}
+
+.done p{
+    background: #D7F9E0;
+    color: #7AC285;
+}
+
+.basket p{
+    background: #FBE3E3;
+    color: #D78989;
+}
+
+.backlog li{
+    border-left: 6px solid #E3E3E3;
+}
+
+.processing li{
+    border-left: 6px solid #D6E7FF;
+}
+
+.done li{
+    border-left: 6px solid #D7F9E0;
+}
+
+.basket li{
+    position: relative;
+    border-left: 6px solid #FBE3E3;
+}
+
+
+
+
+

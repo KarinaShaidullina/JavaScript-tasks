@@ -1,0 +1,31 @@
+.addTask {
+    border-radius: 10px;
+    background: #FFF;
+    padding: 25px 20px;
+    width: 400px;
+    margin: 45px 0 20px 60px;
+}
+
+.addTask_button{
+    background: #2F80ED;
+    color: #FFF;
+    border: none;
+    border-radius: 5px;
+    padding: 0 40px;
+}
+
+.addTask input{
+    border-radius: 5px;
+    border: 1px solid #E0E0E2;
+    padding: 10px 30px 10px 10px;
+}
+
+::-webkit-input-placeholder { 
+    color:#E0E0E2;
+}
+
+.addTask_input{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}

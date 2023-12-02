@@ -1,0 +1,11 @@
+.stub{
+    list-style-type: none;
+    border-radius: 5px;
+    background: #F0F3FA;
+    width: 300px;
+    padding: 17px 10px;
+    color: #E3E3E3;
+    font-weight: 600;
+    /* margin-bottom: 10px; */
+    border: 1px dashed #E3E3E3;
+}

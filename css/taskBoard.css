@@ -1,0 +1,39 @@
+.tasks_container{
+    display: flex;
+    gap: 45px;
+    margin: 45px 0 0 60px;
+}
+
+.tasks ul{
+    padding: 0;
+    list-style-type: none;
+}
+
+.tasks li{
+    list-style-type: none;
+    border-radius: 5px;
+    background: #FFF;
+    width: 300px;
+    padding: 17px 10px;
+    margin-bottom: 10px;
+}
+
+.tasks p{
+    font-weight: 800;
+    border-radius: 5px;
+    padding: 8px 10px;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.clean_btn{
+    background: #C9666C;
+    border: 0;
+    border-radius: 5px;
+    color: #FFF;
+    padding: 14px 0px;
+    width: 300px;
+    align-self: flex-end;
+    margin-left: 1095px;
+    margin-top: auto;
+}
