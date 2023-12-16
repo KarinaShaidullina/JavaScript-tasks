@@ -17,7 +17,6 @@ export class AbstractComponent {
             this.element = createElement(this.getTemplate());
         }
 
-
         return this.element;
     }
 

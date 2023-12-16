@@ -5,5 +5,10 @@ export class CleanButtonComponent extends AbstractComponent {
   getTemplate() {
     return `<button class="clean_btn">&#10005; Очистить</button>`;
   }
+
+  setClickHandler(handler) {
+    this.getElement().addEventListener('click', handler);
+  }
+
 };
 

@@ -6,6 +6,11 @@ export class TaskListComponent extends AbstractComponent {
       this._id = id;
       this._status = status;
       this._title = title;
+
+      // Пример добавления метода getStatus
+      this.getStatus = () => {
+          return this.status;
+      };
   }
 
   getTemplate() {
@@ -16,6 +21,10 @@ export class TaskListComponent extends AbstractComponent {
           </div>
       </div>`;
   }
+  
+  removeTasks() {
+    this.getElement().querySelector('ul').replaceChildren();
+  } 
 }
 
 

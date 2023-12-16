@@ -11,18 +11,19 @@ import { render, RenderPosition } from './render.js';
 
 const bodyContainer = document.querySelector('body');
 const mainContainer = document.querySelector('main');
+const addTaskComponent = new AddTaskComponent();
 
 render(new HeaderComponent(), bodyContainer, RenderPosition.BEFOREBEGIN);
-render(new AddTaskComponent(), mainContainer);
-
+render(addTaskComponent, mainContainer);
 
 const taskBoardContainer = new TaskBoardComponent();
 render(taskBoardContainer, mainContainer);
 
-
 const taskService = new TasksService();
 const boardTasks = [...taskService.getBoardTasks()];
 
+const cleanButtonComponent = new CleanButtonComponent();
+render(cleanButtonComponent, mainContainer);
 
 renderTaskBoard(taskService, taskBoardContainer);
 
@@ -34,16 +35,12 @@ function renderTaskBoard(taskService, container) {
         render(taskListComponent, container.getElement());
 
         const statusLabel = Object.values(Constanats.StatusLabel)[i];
-        const taskListElement = taskListComponent.getElement().querySelector('p');
-        taskListElement.textContent = statusLabel;
+        taskListComponent.getElement().querySelector('p').textContent = statusLabel;
 
         if (tasksByStatus.length > 0) {
             renderTaskList(tasksByStatus, taskListComponent);
-        }
-        else{ 
-            const stubComponent = new StubComponent();
-            const taskListContainer = taskListComponent.getElement();
-            render(stubComponent, taskListContainer);
+        } else {
+            render(new StubComponent(), taskListComponent.getElement());
         }
     });
 }
@@ -52,6 +49,10 @@ function renderTaskList(tasks, taskListComponent) {
     tasks.forEach((task) => {
         const taskListContainer = taskListComponent.getElement().querySelector('ul');
         renderTask(task, taskListContainer);
+        
+        // if (task.status === Constanats.Status.BASKET) {
+        //     render(cleanButtonComponent, taskListContainer);
+        // }
     });
 }
 
@@ -60,8 +61,41 @@ function renderTask(task, container) {
     render(taskComponent, container);
 }
 
-const cleanButtonComponent = new CleanButtonComponent();
-render(cleanButtonComponent, mainContainer);
+document.querySelector('.addTask_button').addEventListener('click', (evt) => {
+    evt.preventDefault();
+
+    const title = addTaskComponent.getInputValue();
+
+    // Проверяем, что поле не пустое
+    if (title) {
+        // Создаем новую задачу 
+        const newTask = { title };
+        taskService.create(newTask);
+
+        // Очищаем поле ввода
+        addTaskComponent.clearInput();
+
+        // После добавления новой задачи, рендерим обновленную доску
+        while (taskBoardContainer.getElement().firstChild) {
+            taskBoardContainer.getElement().removeChild(taskBoardContainer.getElement().firstChild);
+        }
+        renderTaskBoard(taskService, taskBoardContainer);
+    }
+});
+
+cleanButtonComponent.setClickHandler(() => {
+    const basketTasks = taskService.getTasksByStatus(Constanats.Status.BASKET);
+
+    // Удаление задач из сервиса
+    basketTasks.forEach(task => taskService.remove(task.id));
+
+    // Обновление интерфейса
+    taskBoardContainer.getElement().replaceChildren();
+    renderTaskBoard(taskService, taskBoardContainer);
+
+    // Отключение кнопки
+    cleanButtonComponent.getElement().disabled = true;
+});
 
 
 // for(let i=0; i<4; i++){
@@ -71,13 +105,6 @@ render(cleanButtonComponent, mainContainer);
 //             render(new TaskComponent(), listComponent.getElement());
 //         }
 // }
-
-
-
-
-
-
-
 
 
 
